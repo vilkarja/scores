@@ -1,7 +1,4 @@
-// Update with your config settings.
-
 module.exports = {
-
   development: {
     client: 'sqlite3',
     useNullAsDefault: true,
@@ -18,14 +15,11 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: 'scores',
-      // user:     'username',
-      // password: 'password'
+      database: 'scores'
     },
     pool: {
       min: 2,
       max: 10
-    },
+    }
   }
-
-};
+}
