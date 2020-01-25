@@ -1,19 +1,11 @@
-const Score = require('./models/Score')
+const Score = require('./models/Score');
+
+const BASE_URL = '/api/scores'
 
 module.exports = router => {
 
-  router.get("/testAdd", async ctx => {
-    await Score.query().insert({
-        userName: 'FirstOne',
-        points: 100
-      });
 
-    const scores = Score.query();
-
-    ctx.body = await scores;
-  });
-  
-  router.post('/scores', async ctx => {
+  router.post(BASE_URL, async ctx => {
     const insertedGraph = await Score.transaction(async trx => {
       const insertedGraph = await Score.query(trx)
         .insert(ctx.request.body);
@@ -24,18 +16,22 @@ module.exports = router => {
     ctx.body = insertedGraph
   })
 
-  
 
-  
-  router.get('/scores', async ctx => {
-    const query = Score.query()
+
+
+  router.get(BASE_URL, async ctx => {
+    const query = Score.query();
+
+    if (ctx.query.orderBy) {
+      query.orderBy('points', ctx.query.orderBy);
+    }
 
     // query.debug();
 
     ctx.body = await query
   })
 
-  router.patch('/scores/:id', async ctx => {
+  router.patch(`${BASE_URL}/:id`, async ctx => {
     const numUpdated = await Score.query()
       .findById(ctx.params.id)
       .patch(ctx.request.body)
@@ -45,7 +41,7 @@ module.exports = router => {
     }
   })
 
-  router.delete('/scores/:id', async ctx => {
+  router.delete(`${BASE_URL}/:id`, async ctx => {
     const numDeleted = await Score.query()
       .findById(ctx.params.id)
       .delete()

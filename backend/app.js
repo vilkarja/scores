@@ -23,5 +23,5 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 app.listen(port, () => {
-  console.log('Example app listening at port ' + port);
+  console.log('Server listening at port ' + port);
 });
