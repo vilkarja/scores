@@ -6,6 +6,7 @@
   "scripts": {
     "migrate": "knex migrate:latest",
     "make": "knex migrate:make",
+    "seed": "knex seed:run",
     "start": "npm run migrate && nodemon app"
   },
   "author": "Ville Karjalainen",
