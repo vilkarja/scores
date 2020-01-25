@@ -14,9 +14,9 @@
             @showNextItems="nextItems"
           ></TableActionRow>
           <v-row my-1 class="flex-wrap" justify="center">
-            <v-col cols="3" sm="3" class="title font-weight-bold mb-1">Ranking</v-col>
-            <v-col cols="6" sm="3" class="title font-weight-bold mb-1">Username</v-col>
-            <v-col cols="3" sm="3" class="title font-weight-bold mb-1">
+            <v-col cols="2" sm="3" class="title font-weight-bold mb-1">Ranking</v-col>
+            <v-col cols="5" sm="3" class="title font-weight-bold mb-1">Username</v-col>
+            <v-col cols="4" sm="2" class="title font-weight-bold mb-1 text-right">
               Points
               <v-btn icon @click="changeSort">
                 <v-icon>{{sortingIcon}}</v-icon>
