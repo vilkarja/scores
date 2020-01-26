@@ -57,8 +57,16 @@ export default {
           points: parseInt(this.points)
         });
         this.$emit("scoresUpdated");
+        this.$store.commit("addMessage", {
+          type: "success",
+          text: "New score added succesfully!"
+        });
       } catch (e) {
         console.log(e);
+        this.$store.commit("addMessage", {
+          type: "error",
+          text: "Error occured when trying to add new score!"
+        });
       } finally {
         this.isDialogOpen = false;
         this.loading = false;

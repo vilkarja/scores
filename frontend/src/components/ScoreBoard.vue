@@ -29,6 +29,7 @@
               :key="`${scoreObj.id}`"
               :scoreObj="scoreObj"
               :position="sortDirection==='desc' ? index + startIndex + 1 : scores.length - index - startIndex "
+              @scoresUpdated="getAllScores"
             ></ScoreRow>
           </v-col>
           <v-row class="justify-end">

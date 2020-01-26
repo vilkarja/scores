@@ -7,16 +7,18 @@
     </v-app-bar>
 
     <v-content>
+      <MessageBox></MessageBox>
       <router-view></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
+import MessageBox from "@/components/MessageBox.vue";
 export default {
   name: "App",
 
-  components: {},
+  components: { MessageBox },
 
   data: () => ({})
 };

@@ -40,8 +40,16 @@ export default {
       try {
         const res = await api.deleteScore(this.scoreObj.id);
         this.$emit("scoresUpdated");
+        this.$store.commit("addMessage", {
+          type: "success",
+          text: "Score deleted succesfully!"
+        });
       } catch (e) {
         console.log(e);
+        this.$store.commit("addMessage", {
+          type: "Error",
+          text: "Error occured when trying to delete score!"
+        });
       } finally {
         this.isDialogOpen = false;
         this.loading = true;
