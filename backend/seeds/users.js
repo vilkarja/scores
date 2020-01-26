@@ -1,7 +1,7 @@
 const ADJECTIVES = [
     "Running",
     "Flying",
-    "Wwimming",
+    "Swimming",
     "Walking",
     "Laughing",
     "Smiling",

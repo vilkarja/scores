@@ -1,3 +1,5 @@
+const SERVER_ADDRESS = process.env.SERVER_ADDRESS || 'http://localhost:3000';
+
 module.exports = {
   transpileDependencies: [
     'vuetify'
@@ -5,7 +7,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: 'http://localhost:8090',
+        target: SERVER_ADDRESS,
         ws: true,
         changeOrigin: true
       }
