@@ -6,14 +6,11 @@ module.exports = router => {
 
 
   router.post(BASE_URL, async ctx => {
-    const insertedGraph = await Score.transaction(async trx => {
-      const insertedGraph = await Score.query(trx)
-        .insert(ctx.request.body);
 
-      return insertedGraph
-    })
+    const insertedScore = await Score.query()
+      .insert(ctx.request.body);
 
-    ctx.body = insertedGraph
+    ctx.body = insertedScore
   })
 
 
