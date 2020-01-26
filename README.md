@@ -33,12 +33,19 @@ npm install
 npm run serve
 ```
 
-## Knex migration/seed
+## Knex commands
 
 There are different commands to run different functions to the database via Knex. All the command are excecuted in backend/ directory
 
+### Make new migration file
+To create a new migration file run `npm run make MIGRATION_NAME` 
+
 ### Migration
 To migrate the database schema into the latest version run `npm run migrate` 
+
+### Rollback
+To rollback the database schema into earlier version run `npm run rollback` 
+
 
 ### Seed
 To seed the database with users and highscores run `npm run seed`.

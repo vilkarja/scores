@@ -6,6 +6,7 @@
   "scripts": {
     "migrate": "knex migrate:latest",
     "make": "knex migrate:make",
+    "rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
     "start": "npm run migrate && nodemon app"
   },
