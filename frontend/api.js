@@ -43,5 +43,14 @@ export default {
     } catch (e) {
       throw (e);
     }
+  },
+
+  async resetScores() {
+    try {
+      const response = await client.delete(`${END_POINT}`);
+      return response.data
+    } catch (e) {
+      throw (e);
+    }
   }
 };

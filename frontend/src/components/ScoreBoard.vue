@@ -33,6 +33,7 @@
             ></ScoreRow>
           </v-col>
           <v-row class="justify-end">
+            <ResetScoresBtn @scoresUpdated="getAllScores"></ResetScoresBtn>
             <AddNewScoreBtn @scoresUpdated="getAllScores"></AddNewScoreBtn>
           </v-row>
         </v-col>
@@ -46,13 +47,15 @@ import api from "../../api";
 import ScoreRow from "@/components/ScoreRow.vue";
 import AddNewScoreBtn from "@/components/AddNewScoreBtn.vue";
 import TableActionRow from "@/components/TableActionRow.vue";
+import ResetScoresBtn from "@/components/ResetScoresBtn.vue";
 
 export default {
   name: "ScoreBoard",
   components: {
     ScoreRow,
     AddNewScoreBtn,
-    TableActionRow
+    TableActionRow,
+    ResetScoresBtn
   },
   data() {
     return {

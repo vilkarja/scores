@@ -1,6 +1,6 @@
 <template>
   <v-container py-2>
-    <v-row dense class="flex-wrap" justify="center" :class="position % 2 ? 'bottom-border' : ''">
+    <v-row dense class="bottom-border" justify="center">
       <v-col cols="2" sm="2" md="2" offset-md="1" class="text-left">{{position}}.</v-col>
       <v-col cols="5" sm="4" md="5" class="wrap-text">{{scoreObj.userName}}</v-col>
       <v-col cols="4" sm="3" md="3" offset-md="-5" class="text-right">

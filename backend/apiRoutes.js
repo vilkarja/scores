@@ -26,8 +26,6 @@ module.exports = router => {
       query.orderBy('points', ctx.query.orderBy);
     }
 
-    // query.debug();
-
     ctx.body = await query
   })
 
@@ -48,6 +46,16 @@ module.exports = router => {
 
     ctx.body = {
       success: numDeleted == 1
+    }
+  })
+
+  router.delete(BASE_URL, async ctx => {
+
+    const allRows = await Score.query();
+    const numDeleted = await Score.query().delete();
+
+    ctx.body = {
+      success: allRows.length === numDeleted
     }
   })
 
