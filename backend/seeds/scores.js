@@ -1,3 +1,5 @@
+const passwordUtil = require('./../utils/password');
+
 const ADJECTIVES = [
     "Running",
     "Flying",
@@ -28,7 +30,7 @@ const ANIMALS = [
 
 // Creates a list of random users 
 function generateUserList(numOfUsers) {
-    let userList = [];
+    let scoreList = [];
 
     for (let i = 0; i < numOfUsers; i++) {
         let name = `${ ADJECTIVES[Math.floor(Math.random()*ADJECTIVES.length)] }${ ANIMALS[Math.floor(Math.random()*ANIMALS.length)] }`
@@ -36,19 +38,26 @@ function generateUserList(numOfUsers) {
             userName: name,
             points: Math.floor(Math.random() * 1000)
         };
-        userList.push(user);
+        scoreList.push(user);
     }
 
-    return userList;
+    return scoreList;
 }
 
 
 
 exports.seed = async (knex) => {
-    const USER_LIST = generateUserList(200);
+    const SCORES_LIST = generateUserList(200);
+    const hashedPassword = await passwordUtil.hashPassword('password');
 
-    await knex("scores").del(); // Delete old users
-    await knex('scores').insert(USER_LIST); // Add new users as list
+    await knex("scores").del(); // Delete old scores
+    await knex('scores').insert(SCORES_LIST); // Add new scores as list
+
+    await knex("users").del(); // Delete old users
+    await knex('users').insert({
+        username: "test",
+        password: hashedPassword.hash
+    }); // Add new scores as list
 
     console.log('seed done')
 };
