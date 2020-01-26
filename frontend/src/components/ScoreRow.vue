@@ -1,13 +1,14 @@
 <template>
   <v-container py-2>
-    <v-row dense class="flex-wrap" justify="center">
+    <v-row dense class="flex-wrap" justify="center" :class="position % 2 ? 'bottom-border' : ''">
       <v-col cols="2" sm="2" md="2" offset-md="1" class="text-left">{{position}}.</v-col>
-      <v-col cols="5" sm="4" md="3" class="wrap-text">{{scoreObj.userName}}</v-col>
-      <v-col cols="4" sm="3" md="2" class="text-right">
+      <v-col cols="5" sm="4" md="5" class="wrap-text">{{scoreObj.userName}}</v-col>
+      <v-col cols="4" sm="3" md="3" offset-md="-5" class="text-right">
         {{scoreObj.points}}
         <DeleteScoreBtn :scoreObj="scoreObj" @scoresUpdated="scoresUpdated"></DeleteScoreBtn>
       </v-col>
     </v-row>
+    <v-divider></v-divider>
   </v-container>
 </template>
 
@@ -43,5 +44,9 @@ export default {
   word-wrap: break-word;
   word-break: normal;
   hyphens: auto;
+}
+
+.bottom-border {
+  border-color: rgba(0, 0, 0, 0.12);
 }
 </style>
