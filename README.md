@@ -12,17 +12,19 @@ The backend uses Koa.js, Knex.js and Objection.js. Knex is set to use sqlite3 as
 
 ## Run the app
 
-In order to run the app you need to first have Node.js and npm installed. 
+In order to run the app you need to first have Node.js and npm installed. **In order to have some account in the database you have to run the seed command when starting the app for the first time!**
 
 ## Clone the repo
 ```sh
 git clone git@github.com:vilkarja/scores.git
 ```
 
-## Install and start the backend
+## Install and start the backend for the first time
 ```sh
 cd backend
 npm install
+npm run migrate
+npm run seed
 npm start
 ```
 
@@ -32,6 +34,10 @@ cd frontend
 npm install
 npm run serve
 ```
+
+## Test account
+Username: tester
+password: securepassword
 
 ## Knex commands
 

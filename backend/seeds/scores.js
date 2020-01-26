@@ -48,14 +48,14 @@ function generateUserList(numOfUsers) {
 
 exports.seed = async (knex) => {
     const SCORES_LIST = generateUserList(200);
-    const hashedPassword = await passwordUtil.hashPassword('password');
+    const hashedPassword = await passwordUtil.hashPassword('securepassword');
 
     await knex("scores").del(); // Delete old scores
     await knex('scores').insert(SCORES_LIST); // Add new scores as list
 
     await knex("users").del(); // Delete old users
     await knex('users').insert({
-        username: "test",
+        username: "tester",
         password: hashedPassword.hash
     }); // Add new scores as list
 
