@@ -20,10 +20,11 @@ export default new Vuex.Store({
   },
   getters: {
     messages: state => state.messages,
-    newestMessage: state => state.messages.length === 0 ? {} : state.messages.reduce(function (
-      prev, curr) {
+    newestMessage: state => state.messages.length === 0 ? {} : state.messages.reduce((prev,
+      curr) => {
       return prev.id < curr.id ? prev : curr;
     })
+
   },
   actions: {},
   modules: {}

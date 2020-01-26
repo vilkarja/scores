@@ -56,7 +56,9 @@ export default {
           userName: this.username,
           points: parseInt(this.points)
         });
+
         this.$emit("scoresUpdated");
+
         this.$store.commit("addMessage", {
           type: "success",
           text: "New score added succesfully!"

@@ -34,6 +34,7 @@ export default {
         const newestMessage = this.$store.getters.newestMessage;
         this.message = Object.assign({}, this.message, newestMessage);
         this.snackbar = true;
+        // Add timeout event to remove message from store after timeout
         setTimeout(() => this.removeMessage(newestMessage.id), this.timeout);
       }
     }
