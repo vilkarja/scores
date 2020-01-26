@@ -34,6 +34,14 @@ export default {
     } catch (e) {
       throw (e);
     }
+  },
 
+  async deleteScore(scoreId) {
+    try {
+      const response = await client.delete(`${END_POINT}/${scoreId}`);
+      return response.data
+    } catch (e) {
+      throw (e);
+    }
   }
 };

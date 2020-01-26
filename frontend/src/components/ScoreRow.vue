@@ -5,15 +5,15 @@
       <v-col cols="5" sm="3" class="wrap-text">{{scoreObj.userName}}</v-col>
       <v-col cols="4" sm="2" class="text-right">
         {{scoreObj.points}}
-        <v-btn icon color="red">
-          <v-icon>mdi-delete</v-icon>
-        </v-btn>
+        <DeleteScoreBtn :scoreObj="scoreObj" @scoresUpdated="scoresUpdated"></DeleteScoreBtn>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import DeleteScoreBtn from "@/components/DeleteScoreBtn.vue";
+
 export default {
   name: "ScoreRow",
   props: {
@@ -24,6 +24,14 @@ export default {
     position: {
       type: Number,
       required: true
+    }
+  },
+  components: {
+    DeleteScoreBtn
+  },
+  methods: {
+    scoresUpdated() {
+      this.$emit("scoresUpdated");
     }
   }
 };
