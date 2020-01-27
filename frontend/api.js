@@ -17,7 +17,9 @@ export default {
   async getScores() {
     try {
       const response = await client.get(SCORE_END_POINT, {
-        headers: {"Authorization" : `Bearer ${store.getters.token}`}
+        headers: {
+          "Authorization": `Bearer ${store.getters.token}`
+        }
       });
       return response.data
     } catch (err) {
@@ -28,7 +30,9 @@ export default {
   async getScoresBySort(sortDirection) {
     try {
       const res = await client.get(SCORE_END_POINT, {
-        headers: {"Authorization" : `Bearer ${store.getters.token}`},
+        headers: {
+          "Authorization": `Bearer ${store.getters.token}`
+        },
         params: {
           orderBy: sortDirection
         }
@@ -42,7 +46,9 @@ export default {
 
     try {
       const response = await client.post(SCORE_END_POINT, newScore, {
-        headers: {"Authorization" : `Bearer ${store.getters.token}`}
+        headers: {
+          "Authorization": `Bearer ${store.getters.token}`
+        }
       });
       return response.data
     } catch (err) {
@@ -53,7 +59,9 @@ export default {
   async deleteScore(scoreId) {
     try {
       const response = await client.delete(`${SCORE_END_POINT}/${scoreId}`, {
-        headers: {"Authorization" : `Bearer ${store.getters.token}`}
+        headers: {
+          "Authorization": `Bearer ${store.getters.token}`
+        }
       });
       return response.data
     } catch (err) {
@@ -64,7 +72,9 @@ export default {
   async resetScores() {
     try {
       const response = await client.delete(`${SCORE_END_POINT}`, {
-        headers: {"Authorization" : `Bearer ${store.getters.token}`}
+        headers: {
+          "Authorization": `Bearer ${store.getters.token}`
+        }
       });
       return response.data
     } catch (err) {

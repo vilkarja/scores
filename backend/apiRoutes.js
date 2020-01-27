@@ -93,19 +93,40 @@ module.exports = router => {
   })
 
   router.delete(`${SCORE_BASE_URL}/:id`, authenticated, async ctx => {
-    const numDeleted = await Score.query()
-      .findById(ctx.params.id)
-      .delete()
+    const token = ctx.headers.authorization.split(' ')[1];
+    const {
+      user
+    } = jwt.validateToken(token);
 
-    ctx.body = {
-      success: numDeleted == 1
+    const scoreBoard = await ScoreTable.query().where("user_id", user).first();
+    const score = await scoreBoard
+      .$relatedQuery('scores')
+      .where('id', ctx.params.id)
+
+    if (score.length === 0) {
+      ctx.throw(400, 'Score not found')
+    } else {
+      const numDeleted = await scoreBoard
+        .$relatedQuery('scores')
+        .where('id', ctx.params.id)
+        .delete();
+      ctx.body = {
+        success: numDeleted == 1
+      }
     }
   })
 
   router.delete(SCORE_BASE_URL, authenticated, async ctx => {
 
-    const allRows = await Score.query();
-    const numDeleted = await Score.query().delete();
+    const token = ctx.headers.authorization.split(' ')[1];
+    const {
+      user
+    } = jwt.validateToken(token);
+
+    const scoreBoard = await ScoreTable.query().where("user_id", user).first();
+
+    const allRows = await Score.query().where("scoretable_id", scoreBoard.id);
+    const numDeleted = await Score.query().where("scoretable_id", scoreBoard.id).delete();
 
     ctx.body = {
       success: allRows.length === numDeleted
