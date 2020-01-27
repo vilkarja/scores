@@ -10,7 +10,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import ScoreBoard from "@/components/ScoreBoard.vue";
 
 export default {

@@ -7,8 +7,8 @@ module.exports = async (ctx, next) => {
 
   try {
     ctx.request.jwtPayload = jwt.validateToken(token);
-  } catch (err) {
-    ctx.throw(err.status || 403, err.text);
+  } catch (error) {
+    ctx.throw(error.status || 403, error.text);
   }
 
   await next();

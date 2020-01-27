@@ -27,7 +27,7 @@ export default new Vuex.Store({
     removeMessage(state, msgIdToRemove) {
       state.messages = state.messages.filter(msg => msg.id !== msgIdToRemove);
     },
-    auth_success(state, data) {
+    authSuccess(state, data) {
       state.token = data.token
       Vue.set(state, 'user', data.user);
       Vue.set(state, 'scoreBoard', data.scoreBoard);
@@ -64,7 +64,7 @@ export default new Vuex.Store({
             };
 
             localStorage.setItem('token', data.token);
-            commit('auth_success', data);
+            commit('authSuccess', data);
             resolve(response);
           })
           .catch(error => {
