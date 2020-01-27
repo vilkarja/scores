@@ -5,6 +5,20 @@ class Score extends Model {
     return 'scores'
   }
 
+  static get relationMappings() {
+    const ScoreTable = require('./ScoreTable')
+    return {
+        scoretable: {
+            relation: Model.BelongsToOneRelation,
+            modelClass: ScoreTable,
+            join: {
+                from: 'scores.scoretable_id',
+                to: 'scoretables.id'
+            }
+        }
+    }
+}
+
   static get jsonSchema() {
     return {
       type: 'object',
@@ -15,6 +29,7 @@ class Score extends Model {
   
         userName: { type: 'string', minLength: 1, maxLength: 50 },
         points: { type: 'number' },
+        scoretable_id: { type: ['integer', 'null'] },
 
       }
     }
