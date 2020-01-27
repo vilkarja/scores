@@ -11,7 +11,7 @@
         </v-col>
       </v-row>
       <v-btn class="ml-auto" color="amber" @click="login">Login</v-btn>
-      <p>{{errorText}}</p>
+      <p class="red--text">{{errorText}}</p>
     </v-container>
   </v-form>
 </template>

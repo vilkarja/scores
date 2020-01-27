@@ -24,7 +24,7 @@ module.exports = router => {
     const user = await User.query().where("username", username).first();
 
     if (!user) {
-      ctx.throw(400, 'User not found')
+      ctx.throw(400, 'Password or username doesn\'t match')
     }
 
     const pwdMatch = await passwordUtil.comparePassword(password, user.password);
@@ -57,7 +57,7 @@ module.exports = router => {
 
       ctx.body = insertedScore
     } else {
-      ctx.throw(400, 'Can\t insert to someone elses scoreboard!')
+      ctx.throw(400, 'Wrong credentials')
     }
     
   })

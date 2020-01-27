@@ -12,14 +12,4 @@ module.exports = {
     }
   },
 
-  production: {
-    client: 'postgresql',
-    connection: {
-      database: 'scores'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    }
-  }
 }

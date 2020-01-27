@@ -2,17 +2,26 @@
 
 ## Description
 
-This project is made to showcase some of my current knowledge in web development. 
-The app features a list of highscores. The list is sortable by points and user can add new highscores to the list.
+### Frontend
+The frontend is made with Vue.js and it utilizes Vuetify for UI components. API calls are made via Axios.
+
+The app features a list of highscores. The list is sortable by points and user can add new highscores to the list. 
 The highscore table component is selfmade. I could have just used a premade datatable component from Vuetify, but for this case it felt like a better option to do it myself.
 
-The frontend is made with Vue.js and it utilizes Vuetify for UI components. API calls are made via Axios.
- 
+### Backend
 The backend uses Koa.js, Knex.js and Objection.js. Knex is set to use sqlite3 as development database.
+
+- Database has users with scoretables. Scoretables have users scores. 
+- Only authenticated users can access /score routes. /auth/login is public route
+- Fetching and updating scores require that the authenticated user is the correct one
+
+
+ 
+
 
 ## Run the app
 
-In order to run the app you need to first have Node.js and npm installed. **In order to have some account in the database you have to run the seed command when starting the app for the first time!**
+In order to run the app you need to first have Node.js and npm installed. **In order to have some accounts in the database you have to run the seed command when starting the app for the first time!**
 
 ## Clone the repo
 ```sh
@@ -35,9 +44,16 @@ npm install
 npm run serve
 ```
 
-## Test account
+## Test accounts
+```
 Username: tester
-password: securepassword
+password: password
+```
+
+```
+Username: tester2
+password: password
+```
 
 ## Knex commands
 
