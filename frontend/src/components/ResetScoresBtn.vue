@@ -1,6 +1,6 @@
 <template>
   <v-col class="flex-grow-0 flex-shrink-1">
-    <v-btn text class="ml-auto" color="red" @click="openModal">Reset</v-btn>
+    <v-btn text class="ml-auto" color="red" :disabled="isDisabled" @click="openModal">Reset</v-btn>
     <v-dialog v-model="isDialogOpen" max-width="400" :fullscreen="$vuetify.breakpoint.xsOnly">
       <v-card>
         <v-card-title class="headline">Reset scoreboard?</v-card-title>
@@ -19,6 +19,12 @@
 import api from "../../api";
 export default {
   name: "ResetScoresBtn",
+  props: {
+    isDisabled: {
+      type: Boolean,
+      required: true
+    }
+  },
   data: () => ({
     isDialogOpen: false,
     loading: false

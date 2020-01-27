@@ -33,7 +33,7 @@
             ></ScoreRow>
           </v-col>
           <v-row class="justify-end">
-            <ResetScoresBtn @scoresUpdated="getAllScores"></ResetScoresBtn>
+            <ResetScoresBtn :isDisabled="scores.length === 0" @scoresUpdated="getAllScores"></ResetScoresBtn>
             <AddNewScoreBtn @scoresUpdated="getAllScores"></AddNewScoreBtn>
           </v-row>
         </v-col>
