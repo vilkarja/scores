@@ -36,7 +36,8 @@ export default {
     async resetScores() {
       this.loading = true;
       try {
-        await api.resetScores({});
+        const scoreBoardId = this.$store.getters.activeScoreBoardId;
+        await api.resetScores(scoreBoardId);
 
         this.$emit("scoresUpdated");
 

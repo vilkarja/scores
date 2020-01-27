@@ -10,7 +10,7 @@
           <v-text-field v-model="password" type="password" label="Password" required></v-text-field>
         </v-col>
       </v-row>
-      <v-btn class="ml-auto" color="amber" @click="login">Login</v-btn>
+      <v-btn class="ml-auto" color="amber" @click="login" :loading="loading">Login</v-btn>
       <p class="red--text">{{errorText}}</p>
     </v-container>
   </v-form>
@@ -23,17 +23,22 @@ export default {
     return {
       username: "",
       password: "",
-      errorText: ""
+      errorText: "",
+      loading: false
     };
   },
   methods: {
     login() {
+      this.loading = true;
       let username = this.username;
       let password = this.password;
       this.$store.dispatch("login", { username, password })
         .then(() => this.$router.push("/"))
         .catch(error => {
           this.errorText = error.response.data || 'Unexpected error occured'
+        })
+        .finally(() => {
+          this.loading = false;
         });
     }
   }
