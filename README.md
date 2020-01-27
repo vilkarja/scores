@@ -72,3 +72,4 @@ To rollback the database schema into earlier version run `npm run rollback`
 ### Seed
 To seed the database with users and highscores run `npm run seed`.
 This creates 200 records in the scores table 
+**Running this will reset all users and scores**
