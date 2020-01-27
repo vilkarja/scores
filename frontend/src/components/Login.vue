@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="4">
-          <v-text-field v-model="username" :counter="50" label="username" required></v-text-field>
+          <v-text-field v-model="username" :counter="50" label="username" required :rules="usernameRule"></v-text-field>
         </v-col>
 
         <v-col cols="12" md="4">
@@ -24,7 +24,10 @@ export default {
       username: "",
       password: "",
       errorText: "",
-      loading: false
+      loading: false,
+      usernameRule: [
+      v => v.length <= 50 || "Username must be less than 50 characters"
+    ]
     };
   },
   methods: {

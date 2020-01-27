@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     messages: [],
     messageId: 0,
-    token: '',
+    token: localStorage.getItem('token') || '',
     user: {
       id: null,
       username: null
