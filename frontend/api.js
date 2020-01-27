@@ -69,9 +69,9 @@ export default {
     }
   },
 
-  async resetScores() {
+  async resetScores(scoreBoardId) {
     try {
-      const response = await client.delete(`${SCORE_END_POINT}`, {
+      const response = await client.delete(`${SCORE_END_POINT}/reset/${scoreBoardId}`, {
         headers: {
           "Authorization": `Bearer ${store.getters.token}`
         }

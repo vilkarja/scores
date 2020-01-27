@@ -116,21 +116,29 @@ module.exports = router => {
     }
   })
 
-  router.delete(SCORE_BASE_URL, authenticated, async ctx => {
+  router.delete(`${SCORE_BASE_URL}/reset/:scoreboardId`, authenticated, async ctx => {
 
     const token = ctx.headers.authorization.split(' ')[1];
     const {
       user
     } = jwt.validateToken(token);
 
-    const scoreBoard = await ScoreTable.query().where("user_id", user).first();
+    const scoreBoard = await ScoreTable.query()
+    .where("id", ctx.params.scoreboardId)
+    .first();
 
-    const allRows = await Score.query().where("scoretable_id", scoreBoard.id);
-    const numDeleted = await Score.query().where("scoretable_id", scoreBoard.id).delete();
 
-    ctx.body = {
-      success: allRows.length === numDeleted
+    if (scoreBoard.user_id === user) {
+      const allRows = await Score.query().where("scoretable_id", scoreBoard.id);
+      const numDeleted = await Score.query().where("scoretable_id", scoreBoard.id).delete();
+
+      ctx.body = {
+          success: allRows.length === numDeleted
+      }
+    } else {
+      ctx.throw(400, 'Wrong credentials')
     }
+    
   })
 
 }
