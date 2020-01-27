@@ -54,7 +54,8 @@ export default {
       try {
         await api.postScore({
           userName: this.username,
-          points: parseInt(this.points)
+          points: parseInt(this.points),
+          scoretable_id: this.$store.getters.activeScoreBoardId
         });
 
         this.$emit("scoresUpdated");

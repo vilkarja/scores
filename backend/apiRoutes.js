@@ -30,10 +30,13 @@ module.exports = router => {
     const pwdMatch = await passwordUtil.comparePassword(password, user.password);
 
     if (pwdMatch) {
-      const token = await jwt.issueToken(user.id);
+      const token = jwt.issueToken(user.id);
+      const scoreBoard = await ScoreTable.query().where("user_id", user.id).first();
+    
       ctx.body = {
         token: token,
-        user: user
+        user: user,
+        scoreBoard: scoreBoard
       }
     } else {
       ctx.throw(400, 'Password or username doesn\'t match')
@@ -43,17 +46,30 @@ module.exports = router => {
 
   router.post(SCORE_BASE_URL, authenticated, async ctx => {
 
-    const insertedScore = await Score.query()
-      .insert(ctx.request.body);
+    const token = ctx.headers.authorization.split(' ')[1];
+    const {user} = jwt.validateToken(token);
+    
+    const scoreBoard = await ScoreTable.query().where("user_id", user).first();
 
-    ctx.body = insertedScore
+    if (scoreBoard.id === ctx.request.body.scoretable_id) {
+      const insertedScore = await Score.query()
+        .insert(ctx.request.body);
+
+      ctx.body = insertedScore
+    } else {
+      ctx.throw(400, 'Can\t insert to someone elses scoreboard!')
+    }
+    
   })
 
 
-
-
   router.get(SCORE_BASE_URL, authenticated, async ctx => {
-    const query = Score.query();
+    
+    const token = ctx.headers.authorization.split(' ')[1];
+    const {user} = jwt.validateToken(token);
+    
+    const scoreBoard = await ScoreTable.query().where("user_id", user).first();
+    const query = Score.query().where("scoretable_id", scoreBoard.id);
 
     if (ctx.query.orderBy) {
       query.orderBy('points', ctx.query.orderBy);

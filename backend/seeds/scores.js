@@ -55,7 +55,7 @@ exports.seed = async (knex) => {
     const SECOND_SCORETABLE_ID = 2;
     const NUM_OF_SCORES = 202;
     
-    const hashedPassword = await passwordUtil.hashPassword('securepassword');
+    const hashedPassword = await passwordUtil.hashPassword('password');
     await knex("users").del(); // Delete old users
     await knex('users').insert({
         id: FIRST_USER_ID,

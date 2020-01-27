@@ -12,6 +12,10 @@ export default new Vuex.Store({
     user: {
       id: null,
       username: null
+    },
+    scoreBoard: {
+      id: null,
+      name: null
     }
   },
   mutations: {
@@ -26,10 +30,12 @@ export default new Vuex.Store({
     auth_success(state, data) {
       state.token = data.token
       Vue.set(state, 'user', data.user);
+      Vue.set(state, 'scoreBoard', data.scoreBoard);
     },
     logout(state) {
       state.token = ''
       state = { ...state, user: {} }
+      state = { ...state, scoreBoard: {} }
     }
   },
   getters: {
@@ -40,7 +46,8 @@ export default new Vuex.Store({
     }),
     isLoggedIn: state => !!state.token,
     token: state => state.token,
-    username: state => state.user.username
+    username: state => state.user.username,
+    activeScoreBoardId: state => state.scoreBoard.id
 
   },
   actions: {
@@ -52,7 +59,8 @@ export default new Vuex.Store({
           .then(response => {
             const data = {
               token: response.token,
-              user: response.user
+              user: response.user,
+              scoreBoard: response.scoreBoard
             };
 
             localStorage.setItem('token', data.token);
