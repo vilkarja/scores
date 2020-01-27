@@ -1,16 +1,18 @@
 const Score = require('./models/Score');
 const User = require('./models/User');
+const ScoreTable = require('./models/ScoreTable');
 
 const passwordUtil = require('./utils/password');
 const jwt = require('./utils/jwt');
 const authenticated = require('./middleware/authenticated');
 
-const BASE_URL = '/api/scores'
+const SCORE_BASE_URL = '/api/scores'
+const AUTH_BASE_URL = '/api/auth'
 
 module.exports = router => {
 
 
-  router.post('/api/auth/login', async ctx => {
+  router.post(`${AUTH_BASE_URL}/login`, async ctx => {
 
     const {
       username,
@@ -39,7 +41,7 @@ module.exports = router => {
 
   });
 
-  router.post(BASE_URL, authenticated, async ctx => {
+  router.post(SCORE_BASE_URL, authenticated, async ctx => {
 
     const insertedScore = await Score.query()
       .insert(ctx.request.body);
@@ -50,7 +52,7 @@ module.exports = router => {
 
 
 
-  router.get(BASE_URL, authenticated, async ctx => {
+  router.get(SCORE_BASE_URL, authenticated, async ctx => {
     const query = Score.query();
 
     if (ctx.query.orderBy) {
@@ -60,7 +62,7 @@ module.exports = router => {
     ctx.body = await query
   })
 
-  router.patch(`${BASE_URL}/:id`, authenticated, async ctx => {
+  router.patch(`${SCORE_BASE_URL}/:id`, authenticated, async ctx => {
     const numUpdated = await Score.query()
       .findById(ctx.params.id)
       .patch(ctx.request.body)
@@ -70,7 +72,7 @@ module.exports = router => {
     }
   })
 
-  router.delete(`${BASE_URL}/:id`, authenticated, async ctx => {
+  router.delete(`${SCORE_BASE_URL}/:id`, authenticated, async ctx => {
     const numDeleted = await Score.query()
       .findById(ctx.params.id)
       .delete()
@@ -80,7 +82,7 @@ module.exports = router => {
     }
   })
 
-  router.delete(BASE_URL, authenticated, async ctx => {
+  router.delete(SCORE_BASE_URL, authenticated, async ctx => {
 
     const allRows = await Score.query();
     const numDeleted = await Score.query().delete();

@@ -4,6 +4,7 @@
       <div class="d-flex align-center title">Scores app</div>
 
       <v-spacer></v-spacer>
+      <span v-if="isLoggedIn" class="title mr-2">{{username}}</span>
       <span v-if="isLoggedIn">
         <v-btn text @click="logout">Logout</v-btn>
       </span>
@@ -24,6 +25,9 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters.isLoggedIn;
+    },
+    username() {
+      return this.$store.getters.username;
     }
   },
   data: () => ({}),

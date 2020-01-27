@@ -8,8 +8,11 @@ export default new Vuex.Store({
   state: {
     messages: [],
     messageId: 0,
-    token: localStorage.getItem('token') || '',
-    user: {}
+    token: '',
+    user: {
+      id: null,
+      username: null
+    }
   },
   mutations: {
     addMessage(state, msg) {
@@ -20,12 +23,13 @@ export default new Vuex.Store({
     removeMessage(state, msgIdToRemove) {
       state.messages = state.messages.filter(msg => msg.id !== msgIdToRemove);
     },
-    auth_success(state, token, user) {
-      state.token = token
-      state.user = user
+    auth_success(state, data) {
+      state.token = data.token
+      Vue.set(state, 'user', data.user);
     },
     logout(state) {
       state.token = ''
+      state = { ...state, user: {} }
     }
   },
   getters: {
@@ -35,20 +39,24 @@ export default new Vuex.Store({
       return prev.id < curr.id ? prev : curr;
     }),
     isLoggedIn: state => !!state.token,
-    token: state => state.token
+    token: state => state.token,
+    username: state => state.user.username
 
   },
   actions: {
     login({
       commit
-    }, user) {
+    }, credentials) {
       return new Promise((resolve, reject) => {
-        api.authenticate(user)
+        api.authenticate(credentials)
           .then(response => {
-            const token = response.token;
-            const user = response.user;
-            localStorage.setItem('token', token);
-            commit('auth_success', token, user);
+            const data = {
+              token: response.token,
+              user: response.user
+            };
+
+            localStorage.setItem('token', data.token);
+            commit('auth_success', data);
             resolve(response);
           })
           .catch(error => {
