@@ -13,7 +13,6 @@ The backend uses Koa.js, Knex.js and Objection.js. Knex is set to use sqlite3 as
 
 - Database has users with scoretables. Scoretables have users scores. 
 - Only authenticated users can access /score routes. /auth/login is public route
-- Fetching and updating scores require that the authenticated user is the correct one
 
 
  
