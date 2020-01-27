@@ -19,7 +19,7 @@ module.exports = router => {
       password
     } = ctx.request.body;
     if (!username) ctx.throw(400, 'Username required')
-    if(!password) ctx.throw(400, 'Password required')
+    if (!password) ctx.throw(400, 'Password required')
 
     const user = await User.query().where("username", username).first();
 
@@ -32,7 +32,7 @@ module.exports = router => {
     if (pwdMatch) {
       const token = jwt.issueToken(user.id);
       const scoreBoard = await ScoreTable.query().where("user_id", user.id).first();
-    
+
       ctx.body = {
         token: token,
         user: user,
@@ -47,8 +47,10 @@ module.exports = router => {
   router.post(SCORE_BASE_URL, authenticated, async ctx => {
 
     const token = ctx.headers.authorization.split(' ')[1];
-    const {user} = jwt.validateToken(token);
-    
+    const {
+      user
+    } = jwt.validateToken(token);
+
     const scoreBoard = await ScoreTable.query().where("user_id", user).first();
 
     if (scoreBoard.id === ctx.request.body.scoretable_id) {
@@ -59,15 +61,17 @@ module.exports = router => {
     } else {
       ctx.throw(400, 'Wrong credentials')
     }
-    
+
   })
 
 
   router.get(SCORE_BASE_URL, authenticated, async ctx => {
-    
+
     const token = ctx.headers.authorization.split(' ')[1];
-    const {user} = jwt.validateToken(token);
-    
+    const {
+      user
+    } = jwt.validateToken(token);
+
     const scoreBoard = await ScoreTable.query().where("user_id", user).first();
     const query = Score.query().where("scoretable_id", scoreBoard.id);
 

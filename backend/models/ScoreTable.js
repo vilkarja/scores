@@ -1,4 +1,6 @@
-const { Model } = require('objection')
+const {
+  Model
+} = require('objection')
 
 class ScoreTable extends Model {
   static get tableName() {
@@ -9,24 +11,24 @@ class ScoreTable extends Model {
     const User = require('./User')
     const Score = require('./Score')
     return {
-        owner: {
-            relation: Model.BelongsToOneRelation,
-            modelClass: User,
-            join: {
-                from: 'scoretables.user_id',
-                to: 'users.id'
-            }
-        },
-        scores: {
-            relation: Model.HasManyRelation,
-            modelClass: Score,
-            join: {
-                from: 'scoretables.id',
-                to: 'scores.scoretable_id'
-            }
+      owner: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: 'scoretables.user_id',
+          to: 'users.id'
         }
+      },
+      scores: {
+        relation: Model.HasManyRelation,
+        modelClass: Score,
+        join: {
+          from: 'scoretables.id',
+          to: 'scores.scoretable_id'
+        }
+      }
     }
-}
+  }
 
   static get jsonSchema() {
     return {
@@ -34,9 +36,17 @@ class ScoreTable extends Model {
       required: ['name'],
 
       properties: {
-        id: { type: 'integer' },
-        table_name: { type: 'string', minLength: 1, maxLength: 50 },
-        user_id: { type: ['integer', 'null'] },
+        id: {
+          type: 'integer'
+        },
+        table_name: {
+          type: 'string',
+          minLength: 1,
+          maxLength: 50
+        },
+        user_id: {
+          type: ['integer', 'null']
+        },
 
       }
     }

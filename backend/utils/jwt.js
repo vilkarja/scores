@@ -17,7 +17,7 @@ module.exports = {
         };
         return jwt.sign(payload, SECRET);
     },
-    
+
     validateToken(token) {
         return jwt.verify(token, SECRET);
     }
